@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body> 
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h2 class="card-title">My To-Do List</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <input type="text" id="task-input" class="form-control" placeholder="Add a new task...">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" id="add-button">Add</button>
+                            </div>
+                        </div>
+                        <ul id="task-list" class="list-group"> <!-- Add the 'dark-theme' class here -->
+                            <!-- Tasks will be listed here -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+

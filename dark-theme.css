@@ -1,0 +1,17 @@
+/* Dark Theme Styles */
+body.dark-theme {
+    background-color: #202020; /* Dark background color */
+    color: #ffffff; /* Light text color */
+}
+
+.card.dark-theme {
+    background-color: #333; /* Dark card background color */
+    color: #ffffff; /* Light card text color */
+}
+
+/* Add more styles for buttons, inputs, etc., as needed */
+/* Add this CSS rule to make the card body darker */
+.dark-card-body {
+    background-color: #333; /* Dark background color */
+    color: #ffffff; /* Light text color */
+}

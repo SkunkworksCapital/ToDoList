@@ -1,0 +1,12 @@
+/* Light Theme Styles */
+body {
+    background-color: #ffffff; /* Light background color */
+    color: #000000; /* Dark text color */
+}
+
+.card {
+    background-color: #f8f9fa; /* Light card background color */
+    color: #000000; /* Dark card text color */
+}
+
+/* Add more styles for buttons, inputs, etc., as needed */
