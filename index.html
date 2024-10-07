@@ -3,35 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>AJAX To-Do List</title>
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
-<body> 
-    <div class="container">
-        <div class="row justify-content-center mt-5">
+<body>
+
+<div class="container">
+    <div class="columns is-centered">
+        <div class="column is-half">
+            <h2 class="title is-3 has-text-centered">My To-Do List</h2>
             
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <h2 class="card-title">My To-Do List</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="input-group mb-3">
-                            <input type="text" id="task-input" class="form-control" placeholder="Add a new task...">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="add-button">Add</button>
-                            </div>
-                        </div>
-                        <ul id="task-list" class="list-group"> <!-- Add the 'dark-theme' class here -->
-                            <!-- Tasks will be listed here -->
-                        </ul>
-                    </div>
+            <!-- Input and Add Task Button -->
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    <input class="input" type="text" id="new-task" placeholder="Add a new task" onkeydown="handleKeyPress(event)">
+                </div>
+                <div class="control">
+                    <button class="button is-success" onclick="addTask()">Add Task</button>
                 </div>
             </div>
+
+            <!-- Task List -->
+            <ul class="list is-hoverable" id="task-list"></ul>
         </div>
     </div>
-    <script src="script.js"></script>
+</div>
+
+<!-- Script placed just before closing body tag -->
+<script src="script.js"></script>
+
 </body>
 </html>
-

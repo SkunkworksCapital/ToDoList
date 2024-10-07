@@ -1,67 +1,69 @@
-// Function to add a task
-function addTask() {
-    var input = document.getElementById('task-input');
-    if (!input) {
-        console.error("Input element not found.");
-        return;
-    }
-    var task = input.value;
-    if (task) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'todo.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = function () {
-            loadTasks();
-        };
-        xhr.send('action=add&task=' + encodeURIComponent(task));
-        input.value = '';
+// Handle keypress event, check for Enter key
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        addTask();
     }
 }
 
-// Function to delete a task
-function deleteTask(taskId) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'todo.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = function () {
-        loadTasks();
-    };
-    xhr.send('action=delete&task_id=' + taskId);
-}
-
-// Function to load tasks
-function loadTasks() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'todo.php', true);
-    xhr.onload = function () {
-        var taskList = document.getElementById('task-list');
-        if (taskList) {
-            taskList.innerHTML = this.responseText;
-        } else {
-            console.error("Task list element not found.");
+// Fetch tasks from the server
+function fetchTasks() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'tasks.php', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            document.getElementById('task-list').innerHTML = xhr.responseText;
         }
     };
     xhr.send();
 }
 
-// Bind the addTask function to the Add button
-var addButton = document.getElementById('add-button');
-if (addButton) {
-    addButton.addEventListener('click', addTask);
-}
+// Add a new task
+function addTask() {
+    const taskInput = document.getElementById('new-task').value;
+    if (taskInput === '') {
+        alert('Please enter a task');
+        return;
+    }
 
-// Bind the deleteTask function to the Delete buttons
-var taskList = document.getElementById('task-list');
-if (taskList) {
-    taskList.addEventListener('click', function (event) {
-        if (event.target.matches('.delete-button')) {
-            var taskId = event.target.getAttribute('data-task-id');
-            deleteTask(taskId);
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'tasks.php', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            fetchTasks();
+            document.getElementById('new-task').value = ''; // Clear input field
+        } else {
+            alert('Failed to add task');
         }
-    });
+    };
+    xhr.send('action=add&task=' + encodeURIComponent(taskInput)); // Use encodeURIComponent for safety
 }
 
-// Initial load of tasks
-loadTasks();
+// Delete a task
+function deleteTask(id) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'tasks.php', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            fetchTasks();
+        }
+    };
+    xhr.send('action=delete&id=' + id);
+}
 
+// Mark task as completed
+function completeTask(id) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'tasks.php', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            fetchTasks();
+        }
+    };
+    xhr.send('action=complete&id=' + id);
+}
 
+// Load tasks when the page loads
+window.onload = fetchTasks;
